@@ -1,0 +1,7 @@
+{
+  "env": {
+    "DB_PHONE": "paulcc",
+    "DB_PASSWORD": "guideSmiths2020",
+    "DB_NAME": "phones"
+  }
+}
