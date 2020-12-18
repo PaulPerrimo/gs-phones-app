@@ -30,7 +30,7 @@ const DetailedPhone: React.FC<any> = () => {
   });
 
   React.useEffect(() => {
-    if (!description && data?.phone) return;
+    if (!description) return;
     const { id, _id, __v, ...phone } = data?.phone as any;
     if (!editMode && data?.phone && description !== data.phone.description) mutate({ ...phone, description });
   }, [description, editMode, mutate, data?.phone]);
