@@ -3,8 +3,8 @@ import "./App.css";
 import { Redirect, Route, Switch } from "react-router";
 import PhonesList from "./components/list/phones-list";
 
-const PhoneFormComponent = React.lazy(() => import("./components/phone/detailed-phone"));
-const DetailedPhoneComponent = React.lazy(() => import("./components/phone/phone-form"));
+const DetailedPhoneComponent = React.lazy(() => import("./components/phone/detailed-phone"));
+const PhoneFormComponent = React.lazy(() => import("./components/phone/phone-form"));
 
 const App: React.FC = () => (
   <React.Suspense fallback={"Loading..."}>
