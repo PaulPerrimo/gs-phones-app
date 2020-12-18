@@ -39,6 +39,7 @@
 .phone-item.img {
   min-width: 200px;
   min-height: 100px;
+  margin-right: 1rem;
 }
 
 #root {

@@ -23,8 +23,7 @@ const getPhoneById = async (req, res, next) => {
 const createPhone = async ({ body, ...req }, res, next) => {
   const errors = validationResult({ body, ...req });
   if (!errors.isEmpty()) return next(new HttpError("Invalid inputs passed, please check your data.", 422));
-
-  const { name, manufacturer, description, color, price, imageFileName: iFN, img, screen, processor, ram } = body;
+  const { name, manufacturer, description, color, price, imageFileName: iFN, screen, processor, ram } = body;
   let imageFileName = iFN;
   let fileImg = false;
 

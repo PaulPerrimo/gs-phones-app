@@ -42,9 +42,9 @@ export const updatePhone = async (id: string, phone: Phone): Promise<DataPhone> 
 
 export const createPhone = async (phone: Phone): Promise<DataPhone> => {
   try {
-    const formData = new FormData();
-    Object.keys(phone).forEach((k) => formData.append(k, phone[k]));
-    const res = await fetch(`${baseURL}`, { method: "POST", body: formData });
+    const body = new FormData();
+    Object.keys(phone).forEach((k) => body.append(k, phone[k]));
+    const res = await fetch(`${baseURL}`, { method: "POST", body });
     return res.json();
   } catch (error) {
     return { message: error };

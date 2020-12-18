@@ -6,7 +6,7 @@ export interface Phone {
   color: string;
   price: number;
   imageFileName: string;
-  img?: File;
+  img?: File | null;
   screen: string;
   processor: string;
   ram: number;

@@ -2,27 +2,28 @@ import * as React from "react";
 import { genericReducer, StateReducer } from "../../utilities/utilities";
 
 interface ImgPickerState {
-  file: File;
+  file: File | null;
   previewUrl: string | ArrayBuffer | null;
   isValid: boolean;
 }
 
-const getDefaultValues = (): ImgPickerState => ({ file: null as any, previewUrl: "", isValid: false });
+const getDefaultValues = (): ImgPickerState => ({ file: null, previewUrl: "", isValid: false });
 
 type ImgUploadProps = {
   disabled?: boolean;
   onInput: (id: string, file: File, fileIsValid: boolean) => void;
   id: string;
+  img: File | null;
 };
 
-const ImgUpload: React.FC<ImgUploadProps> = ({ onInput, id, disabled }) => {
+const ImgUpload: React.FC<ImgUploadProps> = ({ onInput, id, disabled, img }) => {
   const [{ file, isValid, previewUrl }, setState] = React.useReducer<StateReducer<ImgPickerState>, ImgPickerState>(
     genericReducer,
     getDefaultValues(),
     getDefaultValues
   );
 
-  const filePickerRef = React.useRef<HTMLInputElement>(null);
+  const filePickerRef = React.useRef<HTMLInputElement | null>(null);
 
   const pickImgHandler = () => {
     if (!filePickerRef.current) return;
@@ -50,6 +51,10 @@ const ImgUpload: React.FC<ImgUploadProps> = ({ onInput, id, disabled }) => {
     fileReader.readAsDataURL(file);
   }, [file]);
 
+  React.useEffect(() => {
+    if (filePickerRef.current && !img) filePickerRef.current.value = "";
+  }, [img]);
+
   return (
     <div className="img-upload">
       <input
@@ -62,7 +67,7 @@ const ImgUpload: React.FC<ImgUploadProps> = ({ onInput, id, disabled }) => {
       />
       <div className="img-upload-items">
         <div className="img-upload-preview">
-          {previewUrl ? <img height={100} src={previewUrl as string} alt="Preview" /> : "Pick an Image"}
+          {previewUrl && img ? <img height={100} src={previewUrl as string} alt="Preview" /> : "Pick an Image"}
         </div>
         <button disabled={disabled} className="btn" onClick={pickImgHandler}>
           Pick Image

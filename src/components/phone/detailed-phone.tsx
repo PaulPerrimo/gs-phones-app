@@ -30,7 +30,7 @@ const DetailedPhone: React.FC<any> = () => {
   });
 
   React.useEffect(() => {
-    if (!description) return;
+    if (!description && data?.phone) return;
     const { id, _id, __v, ...phone } = data?.phone as any;
     if (!editMode && data?.phone && description !== data.phone.description) mutate({ ...phone, description });
   }, [description, editMode, mutate, data?.phone]);
@@ -43,8 +43,7 @@ const DetailedPhone: React.FC<any> = () => {
   if (status === "loading") return <>Loading ...</>;
   if (status === "error") return <>Something went wrong</>;
 
-  const src = data?.phone?.fileImg ? `${process.env.REACT_APP_ASSET_URL}/${data?.phone?.mageFileName}` : data?.phone?.imageFileName;
-
+  const src = data?.phone?.fileImg ? `${process.env.REACT_APP_ASSET_URL}/${data?.phone?.imageFileName}` : data?.phone?.imageFileName;
   return (
     <div className="detailed-container">
       <button className="btn" onClick={() => history.push("/")}>

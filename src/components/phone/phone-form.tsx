@@ -16,6 +16,7 @@ const getDefaultValues = (): Phone => ({
   ram: 0,
   processor: "",
   screen: "",
+  img: null,
 });
 
 type StateReducer = (state: Phone, newState: NewState<Phone>) => Phone;
@@ -26,17 +27,16 @@ const reducer = (state: Phone, newState: NewState<Phone>): Phone =>
 const PhoneForm: React.FC = () => {
   const history = useHistory();
   const [state, setState] = React.useReducer<StateReducer, Phone>(reducer, getDefaultValues(), getDefaultValues);
-  const [imgFile, setImgFile] = React.useState<File | null>();
-  const { mutate } = useMutation((update: Phone = state) => (imgFile ? createPhone({ ...update, img: imgFile }) : createPhone(update)), {
+  const { mutate } = useMutation((update: Phone = state) => (img ? createPhone({ ...update, img }) : createPhone(update)), {
     onSuccess: ({ phone, ...rest }) => {
-      console.log({ phone, ...rest });
       phone && history.push(`phone/${phone.id}`);
     },
   });
 
-  const { color, description, imageFileName, manufacturer, name, price, ram, processor, screen } = state;
+  const { color, description, imageFileName, manufacturer, name, price, img, ram, processor, screen } = state;
 
-  const isValid = () => color && description && (imageFileName || imgFile) && manufacturer && name && price && ram && processor && screen;
+  const isValid = (): boolean =>
+    !!color && !!description && (!!imageFileName || !!img) && !!manufacturer && !!name && !!price && !!ram && !!processor && !!screen;
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -45,10 +45,7 @@ const PhoneForm: React.FC = () => {
 
   const changeHandler = ({ target: { value, name } }: React.ChangeEvent<HTMLInputElement>) => setState({ [name]: value });
 
-  const imgPickerHandler = (id: string, file: File, fileIsValid: boolean) => {
-    console.log({ id, file, fileIsValid });
-    setImgFile(file);
-  };
+  const imgPickerHandler = (id: string, img: File, fileIsValid: boolean) => setState({ img });
 
   const onReset = () => setState(getDefaultValues());
 
@@ -93,9 +90,9 @@ const PhoneForm: React.FC = () => {
           />
           <label htmlFor="color-id">Color</label>
           <input type="text" className="field" id="color-id" placeholder="Color" value={color} name="color" onChange={changeHandler} />
-          <ImgUpload disabled={!!imageFileName} id="form-img" onInput={imgPickerHandler} />
+          <ImgUpload img={img as any} disabled={!!imageFileName} id="form-img" onInput={imgPickerHandler} />
           <input
-            disabled={!!imgFile}
+            disabled={!!img}
             type="text"
             className="field"
             id="imageFileName-id"
