@@ -1,38 +1,188 @@
-.App {
-  text-align: center;
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* flex-wrap: wrap; */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.btn.header-btn {
+  margin-right: 1rem;
+}
+.card {
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 4px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.card.phone-item:hover {
+  box-shadow: 0 0px 4px -1px rgba(0, 0, 0, 0.2), 0 0px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+}
+.card.phone-item {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #eee;
+  padding: 1rem;
+  margin: 0 1rem 1rem 1rem;
+  justify-content: stretch;
+  align-items: center;
+  cursor: pointer;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.card .content {
+  display: flex;
+  flex: 1 1;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.phone-item.img {
+  min-width: 200px;
+  min-height: 100px;
+}
+
+#root {
+  padding: 1rem;
+  margin: 0 20%;
+}
+
+.card hr {
+  margin: 0 1rem;
+}
+
+.list {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin: 1rem;
+}
+
+.list h1 {
+  margin: 1rem;
+}
+
+.detailed-container .btn {
+  margin: 1rem;
+}
+
+.btn:hover {
+  background-color: #212121ec;
+}
+.btn {
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  background-color: #212121;
   color: white;
+  border-radius: 4px;
 }
 
-.App-link {
-  color: #61dafb;
+.btn.delete {
+  background-color: #eee;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.btn.delete:hover {
+  background-color: #aaa;
+}
+
+.btn.edit {
+  align-self: flex-end;
+}
+
+.detailed-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailed-container .card.phone-item {
+  justify-content: center;
+  box-shadow: 0 0px 4px -1px rgba(0, 0, 0, 0.2), 0 0px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  cursor: auto;
+}
+
+.field {
+  display: block;
+  min-height: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.field textarea {
+  padding: 0.7rem;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  background-color: #ddd;
+  outline: none;
+  max-width: 90vw;
+  border-radius: 4px;
+}
+
+.phone-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.field textarea:focus {
+  border-bottom-color: #777;
+}
+
+button.btn:disabled {
+  cursor: no-drop;
+  opacity: 0.8;
+}
+button.btn:disabled {
+  cursor: no-drop;
+  opacity: 0.8;
+}
+
+button.btn.mini.header-btn {
+  display: none;
+}
+
+img {
+  max-height: 200px;
+  max-width: 200px;
+  height: auto;
+  width: auto;
+}
+
+@media (max-width: 425px) {
+  #root {
+    margin: 0;
   }
-  to {
-    transform: rotate(360deg);
+
+  button.btn.large.header-btn {
+    display: none;
+  }
+
+  button.btn.mini.header-btn {
+    display: inline-block;
+  }
+
+  .header button.btn {
+    white-space: nowrap;
+  }
+
+  .card.phone-item {
+    flex-direction: column;
+  }
+  .card .content {
+    flex-direction: column;
+  }
+  .phone-item.img {
+    min-width: 100px;
+  }
+  img {
+    height: 100px;
   }
 }
